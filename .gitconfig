@@ -1,0 +1,14 @@
+[user]
+	name	= "bac251"	
+	email	= taichirou@saito-koken.co.jp
+[color]
+	ui	= auto
+[alias]
+	co	= checkout
+	cm	= commit
+	st	= status
+	bra	= branch
+[gui]
+	encoding= utf-8
+[core]
+	quotepath = false
