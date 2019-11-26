@@ -22,11 +22,20 @@ nnoremap + <C-a>
 nnoremap - <C-x>
 nnoremap Y y$
 
+autocmd BufNewFile,Bufread *.html nnoremap <C-i> <End>a--><Esc><Home>i<\!--<Esc>
+autocmd BufNewFile,Bufread *.html nnoremap <C-s> <End>xxx<Esc><Home>xxxx<Esc>
+autocmd BufNewFile,Bufread *.css nnoremap <C-i> <End>a*/<Esc><Home>i/*<Esc>
+autocmd BufNewFile,Bufread *.css nnoremap <C-s> <End>xx<Esc><Home>xx<Esc>
+autocmd BufNewFile,Bufread *.php nnoremap <C-i> <Home>i//<Esc>
+autocmd BufNewFile,Bufread *.php nnoremap <C-s> <Home>xx<Esc>
+autocmd BufNewFile,Bufread *.js nnoremap <C-i> <Home>i//<Esc>
+autocmd BufNewFile,Bufread *.js nnoremap <C-s> <Home>xx<Esc>
+
+
 " vim-polyglot
 set runtimepath+=~/src/vim-polyglot
 syntax enable
 filetype plugin indent on
-
 " 行番号色
 highlight LineNr ctermfg=015
 highlight CursorLineNr ctermfg=000 ctermbg=220
@@ -35,6 +44,8 @@ highlight clear CursorLine
 
 " Filetype AS
 autocmd BufRead,BufNewFile *.as setfiletype as
+autocmd BufNewFile,Bufread *.as nnoremap <C-i> <Home>i;<Esc>
+autocmd BufNewFile,Bufread *.as nnoremap <C-s> <Home>x<Esc>
 
 " dein Script--------------------------------------
 
@@ -46,27 +57,27 @@ endif
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " プラグインがインストールされるディレクトリ
-let s:dein_dir = expand('~/.cache/dein')
+"let s:dein_dir = expand('~/.cache/dein')
 
 " dein.vim本体
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+"let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 " dein.vimが無ければgithubから落としてくる
-if &runtimepath !~# '/dein.vim'
-	if !isdirectory(s:dein_repo_dir)
-		execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-	endif
-	execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-endif
+"if &runtimepath !~# '/dein.vim'
+"	if !isdirectory(s:dein_repo_dir)
+"		execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+"	endif
+"	execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+"endif
 
 " 設定開始
-if dein#load_state(s:dein_dir)
-	call dein#begin(s:dein_dir)
+if dein#load_state($HOME . '/.cache/dein')
+	call dein#begin($HOME . '/.cache/dein')
 
 	" プラグインリストを収めたTOMLファイル
-	let g:rc_dir	= expand('~/.vim/rc')
-	let s:toml	= g:rc_dir . '/dein.toml'
-	let s:lazy_toml	= g:rc_dir . '/dein_lazy.toml'
+	let s:toml_dir	= $HOME . '/.vim/rc/'
+	let s:toml	= s:toml_dir . '/dein.toml'
+	let s:lazy_toml	= s:toml_dir . '/dein_lazy.toml'
 
 	" TOMLを読み込みキャッシュしておく
 	call dein#load_toml(s:toml,	{'lazy': 0})
