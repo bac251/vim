@@ -30,6 +30,8 @@ autocmd BufNewFile,Bufread *.php nnoremap <C-i> <Home>i//<Esc>
 autocmd BufNewFile,Bufread *.php nnoremap <C-s> <Home>xx<Esc>
 autocmd BufNewFile,Bufread *.js nnoremap <C-i> <Home>i//<Esc>
 autocmd BufNewFile,Bufread *.js nnoremap <C-s> <Home>xx<Esc>
+autocmd BufNewFile,Bufread *.xml nnoremap <C-i> <End>a--><Esc><Home>i<\!--<Esc>
+autocmd BufNewFile,Bufread *.xml nnoremap <C-s> <End>xxx<Esc><Home>xxxx<Esc>
 
 
 " vim-polyglot
