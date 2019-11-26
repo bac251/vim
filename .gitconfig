@@ -11,4 +11,5 @@
 [gui]
 	encoding= utf-8
 [core]
+	editor	= vim
 	quotepath = false
