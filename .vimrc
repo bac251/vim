@@ -25,16 +25,16 @@ nnoremap - <C-x>
 nnoremap Y y$
 
 "各言語エスケープコマンド
-autocmd BufNewFile,Bufread *.html nnoremap <C-i> <End>a--><Esc><Home>i<\!--<Esc>
-autocmd BufNewFile,Bufread *.html nnoremap <C-s> <End>xxx<Esc><Home>xxxx<Esc>
-autocmd BufNewFile,Bufread *.css nnoremap <C-i> <End>a*/<Esc><Home>i/*<Esc>
-autocmd BufNewFile,Bufread *.css nnoremap <C-s> <End>xx<Esc><Home>xx<Esc>
-autocmd BufNewFile,Bufread *.php nnoremap <C-i> <Home>i//<Esc>
-autocmd BufNewFile,Bufread *.php nnoremap <C-s> <Home>xx<Esc>
-autocmd BufNewFile,Bufread *.js nnoremap <C-i> <Home>i//<Esc>
-autocmd BufNewFile,Bufread *.js nnoremap <C-s> <Home>xx<Esc>
-autocmd BufNewFile,Bufread *.xml nnoremap <C-i> <End>a--><Esc><Home>i<\!--<Esc>
-autocmd BufNewFile,Bufread *.xml nnoremap <C-s> <End>xxx<Esc><Home>xxxx<Esc>
+autocmd BufNewFile,Bufread *.html nnoremap <C-j> <End>a--><Esc><Home>i<\!--<Esc>
+autocmd BufNewFile,Bufread *.html nnoremap <C-h> <End>xxx<Esc><Home>xxxx<Esc>
+autocmd BufNewFile,Bufread *.css nnoremap <C-j> <End>a*/<Esc><Home>i/*<Esc>
+autocmd BufNewFile,Bufread *.css nnoremap <C-h> <End>xx<Esc><Home>xx<Esc>
+autocmd BufNewFile,Bufread *.php nnoremap <C-j> <Home>i//<Esc>
+autocmd BufNewFile,Bufread *.php nnoremap <C-h> <Home>xx<Esc>
+autocmd BufNewFile,Bufread *.js nnoremap <C-j> <Home>i//<Esc>
+autocmd BufNewFile,Bufread *.js nnoremap <C-h> <Home>xx<Esc>
+autocmd BufNewFile,Bufread *.xml nnoremap <C-j> <End>a--><Esc><Home>i<\!--<Esc>
+autocmd BufNewFile,Bufread *.xml nnoremap <C-h> <End>xxx<Esc><Home>xxxx<Esc>
 
 
 " vim-polyglot
@@ -49,8 +49,12 @@ highlight clear CursorLine
 
 " Filetype AS
 autocmd BufRead,BufNewFile *.as setfiletype as
-autocmd BufNewFile,Bufread *.as nnoremap <C-i> <Home>i;<Esc>
-autocmd BufNewFile,Bufread *.as nnoremap <C-s> <Home>x<Esc>
+autocmd BufNewFile,Bufread *.as nnoremap <C-j> <Home>i;<Esc>
+autocmd BufNewFile,Bufread *.as nnoremap <C-h> <Home>x<Esc>
+
+" 辞書
+autocmd FileType php :set dictionary=~/.vim/dict/PHP.dict
+autocmd FileType as :set dictionary=~/.vim/dict/AS.dict
 
 " dein Script--------------------------------------
 
@@ -106,16 +110,15 @@ endif
 " End dein Scripts-----------------------------------
 "
 " Start sneocomplete.vim設定-------------------------------
-
-let g:neocomplete#enable_at_startup = 1
-
-" Configuration Example
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
+"let g:acp_enableAtStartup = 0
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
+" Use underbar completion
+let g:neocomplete#enable_underbar_completion = 1
+
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 
@@ -172,8 +175,12 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"autocmd FileType php setlocal omnifunc=phpcomplete#Complete
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"autocmd FileType c setlocal omnifunc=ccomplete#Complete
+let g:neocomplete#sources#omni#input_patterns.as = '[^.[:digit:] *\t]\%(\.\|->\)'
+"autocmd FileType as setlocal omnifunc=ascomplete#Complete
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " For perlomni.vim setting.
