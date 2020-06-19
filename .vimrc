@@ -37,10 +37,6 @@ autocmd BufNewFile,Bufread *.xml nnoremap <C-j> <End>a--><Esc><Home>i<\!--<Esc>
 autocmd BufNewFile,Bufread *.xml nnoremap <C-h> <End>xxx<Esc><Home>xxxx<Esc>
 
 
-" vim-polyglot
-set runtimepath+=~/src/vim-polyglot
-syntax enable
-filetype plugin indent on
 " 行番号色
 highlight LineNr ctermfg=015
 highlight CursorLineNr ctermfg=000 ctermbg=220
@@ -135,15 +131,18 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" Plugin key-mappings.
+" Plugin key-mappings
+imap <C-k>     <Plug>(neocomplete_snippets_expand)
+smap <C-k>     <Plug>(neocomplete_snippets_expand)
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"inoremap <expr><CR> pumvisible() ? neocomplete#smart_close_popup() : "<CR>"
 function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  return pumvisible() ? "\<C-y>" : "\<CR>"
   " For no inserting <CR> key.
   "return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
@@ -152,6 +151,8 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-y> neocomplete#close_popup()
+"inoremap <expr><C-e> neocomplete#cancel_popup()
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
